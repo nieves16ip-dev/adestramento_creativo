@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="gl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proba de dominio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: center;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        .caixa {
+            background: white;
+            padding: 2rem 3rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .ok {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="caixa">
+        <h1>✅ Funciona!</h1>
+        <p class="ok">O dominio está ligado correctamente ao repositorio de GitHub.</p>
+        <p>Se ves esta páxina, o despregamento foi un éxito.</p>
+        <p><small>Data de proba: <span id="data"></span></small></p>
+    </div>
+
+    <script>
+        document.getElementById('data').textContent = new Date().toLocaleString('gl-ES');
+    </script>
+</body>
+</html>
