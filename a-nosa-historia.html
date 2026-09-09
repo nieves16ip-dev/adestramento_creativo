@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="gl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quen Somos - Adestramento Creativo</title>
+  <link rel="stylesheet" href="estilos.css">
+  <style>
+    /* Estilos específicos desta páxina (non tocan header/footer globais) */
+    body {
+      background: linear-gradient(135deg, #6dd5ed, #2193b0);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 40px auto;
+    }
+
+    .container h1 {
+      text-align: center;
+      margin-bottom: 40px;
+      color: #fafafa;
+      font-size: 2.5rem;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+      letter-spacing: 1px;
+    }
+
+    .quen-somos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      align-items: center;
+      background-color: #171717;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+      padding: 40px;
+      transition: transform 0.3s ease;
+    }
+
+    .quen-somos:hover {
+      transform: translateY(-5px);
+    }
+
+    /* Columna esquerda - Imaxe */
+    .columna-imaxe {
+      flex: 1.3 1 400px;
+      min-width: 300px;
+      text-align: center;
+    }
+
+    .columna-imaxe img {
+      width: 100%;
+      max-width: 550px;
+      height: auto;
+      border-radius: 16px;
+      object-fit: cover;
+      border: 5px solid #0cc0df;
+      box-shadow: 0 6px 16px rgba(33, 147, 176, 0.4);
+      transition: transform 0.3s ease;
+    }
+
+    .columna-imaxe img:hover {
+      transform: scale(1.03);
+    }
+
+    /* Columna dereita - Texto */
+    .columna-texto {
+      flex: 1 1 400px;
+      min-width: 300px;
+    }
+
+    .columna-texto h2 {
+      margin-bottom: 15px;
+      color: #0cc0df;
+      font-size: 1.8rem;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .columna-texto h2::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, #2193b0, #6dd5ed);
+      border-radius: 2px;
+    }
+
+    .columna-texto p {
+      margin-bottom: 15px;
+      text-align: justify;
+      color: #fafafa;
+    }
+
+    /* Responsive: en pantallas pequenas apílase */
+    @media (max-width: 768px) {
+      .quen-somos {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .container h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CABECEIRA -->
+  <header class="header">
+    <div class="logo">
+      <a href="index.html" class="logo">
+        <img src="imaxes/logo.png" alt="Logo da empresa" data-i18n-alt="logo_alt">
+      </a>
+    </div>
+
+    <!-- Botón hamburguesa: só visible en móbil -->
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="navbar">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="navbar" id="navbar">
+      <ul>
+        <li><a href="index.html" data-i18n="nav_inicio">INICIO</a></li>
+
+        <li><a href="quen-somos.html" data-i18n="nav_quensomos">QUEN SOMOS</a></li>
+
+        <li><a href="que-aportamos.html" data-i18n="nav_comotraballamos">COMO TRABALLAMOS</a></li>
+        
+        <li><a href="a-nosa-historia.html" class="active" data-i18n="nav_nosahistoria">A NOSA HISTORIA</a></li>
+
+        <li><a href="contacto.html" data-i18n="nav_contacto">CONTACTO</a></li>
+      </ul>
+    </nav>
+
+    <div class="lang-dropdown">
+      <button class="lang-btn" id="langBtn" aria-haspopup="listbox" aria-expanded="false" aria-controls="langMenu">
+        <span id="idioma-actual">🇪🇸 Galego</span>
+        <svg class="arrow" width="12" height="12" viewBox="0 0 24 24" fill="none">
+          <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <ul class="lang-menu" id="langMenu" role="listbox">
+        <li data-lang="gl" data-label="🇬🇱 Galego" role="option">🇬🇱 Galego <span class="default-tag">(por defecto)</span></li>
+        <li data-lang="pt" data-label="🇵🇹 Portugués" role="option">🇵🇹 Portugués</li>
+        <li data-lang="es" data-label="🇪🇸 Español" role="option">🇪🇸 Español</li>
+        <li data-lang="en" data-label="en Inglés" role="option">en Inglés</li>
+        <li data-lang="fr" data-label="🇫🇷 Francés" role="option">🇫🇷 Francés</li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- CONTIDO PRINCIPAL -->
+  <div class="container">
+    <h1 data-i18n="historia_titulo">Adestramento Creativo</h1>
+
+    <div class="quen-somos">
+
+      <!-- COLUMNA ESQUERDA: IMAXE -->
+      <div class="columna-imaxe">
+        <img src="imaxes/historia.jpg" alt="A nosa equipa" data-i18n-alt="quensomos_imaxe_alt">
+      </div>
+
+      <!-- COLUMNA DEREITA: TEXTO -->
+      <div class="columna-texto">
+        <h2 data-i18n= "h1">A nosa historia</h2>
+        <p data-i18n="h2">
+         A nosa historia comeza moito antes da creación de Adestramento Creativo. Durante máis de dúas décadas vivimos o ciclismo desde dentro, compartindo rutas, competicións, retos e innumerables experiencias que nos fixeron medrar como deportistas e como persoas.
+        </p>
+        <p data-i18n="h3">
+         Ao longo deste camiño tivemos a oportunidade de coñecer diferentes disciplinas, desde o XCO e o ciclismo en pista ata o ciclismo de estrada, celebrando éxitos deportivos como campionatos galegos, subcampionatos nacionais e participacións en competicións internacionais. Pero, sobre todo, aprendemos que o verdadeiro valor do ciclismo está nas persoas coas que compartes cada quilómetro.
+        <p data-i18n="h4">
+         Nestes anos destacamos especialmente en disciplinas como o XCO, o ciclismo en pista e o ciclismo de estrada, acompañando a corredores desde os seus primeiros pasos ata conseguir campionatos galegos, subcampionatos nacionais e resultados internacionais.
+        </p>
+        <p data-i18n="p1">
+       Con esa ilusión nace Adestramento Creativo: un club creado para promover o ciclismo, fomentar hábitos de vida saudables e ofrecer un espazo de encontro para todas aquelas persoas que comparten esta paixón, independentemente da súa idade ou nivel.
+         <p data-i18n="p2">
+        Porque cremos que os mellores proxectos non se constrúen arredor dos resultados, senón das persoas. Queremos seguir sumando quilómetros, experiencias e ilusións, facendo medrar o ciclismo e creando unha comunidade na que cada socio e socia atope o seu lugar.
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p data-i18n="h5">&copy; 2026 | Adestramento Creativo | Todos os dereitos reservados.</p>
+    <p data-i18n="h6">Contacto: adestramentocreativo@outlook.com | Tel: +34 694 303 766</p>
+  </footer>
+
+  <script src="traducions.js?v=9"></script>
+  <script src="script.js?v=5"></script>
+</body>
+</html>
