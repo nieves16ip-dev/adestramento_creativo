@@ -1,47 +1,133 @@
 <!DOCTYPE html>
 <html lang="gl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proba de dominio</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f4f4f4;
-            color: #333;
-            text-align: center;
-        }
-        h1 {
-            color: #2c3e50;
-        }
-        .caixa {
-            background: white;
-            padding: 2rem 3rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-        }
-        .ok {
-            color: green;
-            font-weight: bold;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inicio - Adestramento Creativo</title>
+<link rel="stylesheet" href="estilos.css">
 </head>
 <body>
-    <div class="caixa">
-        <h1>✅ Funciona!</h1>
-        <p class="ok">O dominio está ligado correctamente ao repositorio de GitHub.</p>
-        <p>Se ves esta páxina, o despregamento foi un éxito.</p>
-        <p><small>Data de proba: <span id="data"></span></small></p>
+
+  <!-- CABECEIRA -->
+  <header class="header">
+    <div class="logo">
+      <a href="index.html" class="logo">
+        <img src="imaxes/logo.png" alt="Logo da empresa" data-i18n-alt="logo_alt">
+      </a>
     </div>
 
-    <script>
-        document.getElementById('data').textContent = new Date().toLocaleString('gl-ES');
-    </script>
+    <!-- Botón hamburguesa: só visible en móbil -->
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="navbar" id="navbar">
+      <ul>
+        <li><a href="index.html" class="active" data-i18n="nav_inicio">INICIO</a></li>
+
+        <li class="dropdown">
+          <a href="quen-somos.html">
+            <span data-i18n="nav_quensomos">QUEN SOMOS</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="que-aportamos.html">
+            <span data-i18n="nav_comotraballamos">QUE APORTAMOS</span>
+          </a>
+        </li>
+
+        <li class="dropdown">
+          <a href="a-nosa-historia.html">
+            <span data-i18n="nav_nosahistoria">A NOSA HISTORIA</span>
+          </a>
+        </li>
+
+        <li><a href="contacto.html" data-i18n="nav_contacto">CONTACTO</a></li>
+      </ul>
+    </nav>
+
+    <!-- ✅ LANG DROPDOWN CORRIXIDO: sen onclick inline, con id e data-* -->
+    <div class="lang-dropdown">
+      <button
+        id="langBtn"
+        class="lang-btn"
+        type="button"
+        aria-haspopup="listbox"
+        aria-expanded="false"
+        aria-controls="langMenu">
+        <span id="idioma-actual">GL Galego</span>
+        <svg class="arrow" width="12" height="12" viewBox="0 0 24 24" fill="none">
+          <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <ul class="lang-menu" id="langMenu" role="listbox">
+        <li role="option" data-lang="gl" data-label="GL Galego">
+          GL Galego <span class="default-tag">(por defecto)</span>
+        </li>
+        <li role="option" data-lang="pt" data-label="🇵🇹 Portugués">🇵🇹 Portugués</li>
+        <li role="option" data-lang="es" data-label="🇪🇸 Español">🇪🇸 Español</li>
+        <li role="option" data-lang="en" data-label="en Inglés">EN Inglés</li>
+        <li role="option" data-lang="fr" data-label="🇫🇷 Francés">🇫🇷 Francés</li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- BANNER PRINCIPAL -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 data-i18n="hero_titulo">Benvido/a á Asociación Adestramento Creativo</h1>
+      <p data-i18n="hero_texto">Porque detrás de cada deportista hai unha historia que merece ser apoiada.</p>
+    </div>
+  </section>
+
+  <!-- SECCIÓN RESUMO -->
+  <section class="content">
+    <div class="card">
+      <h3 data-i18n="card1_titulo">Quen somos</h3>
+      <p data-i18n="card1_texto">Adestramento Creativo é unha asociación deportiva comprometida coa promoción do ciclismo como unha ferramenta para mellorar a saúde, fomentar hábitos de vida saudables e construír unha sociedade máis activa, responsable e respectuosa.</p>
+      <a href="quen-somos.html" data-i18n="card1_link">Ler máis →</a>
+    </div>
+    <div class="card">
+      <h3 data-i18n="card2_titulo">Que aportamos</h3>
+      <p data-i18n="card2_texto">No noso club entendemos o ciclismo como moito máis ca un deporte. É unha forma de vivir, unha ferramenta para crecer, aprender, compartir e desfrutar do camiño, sempre desde o respecto, o esforzo e a ilusión.</p>
+      <a href="que-aportamos.html" data-i18n="card2_link">Ler máis →</a>
+    </div>
+
+    <div class="card">
+      <h3 data-i18n="historia1">A nosa historia</h3>
+      <p data-i18n="historia2">A nosa historia comeza moito antes da creación de Adestramento Creativo. Durante máis de dúas décadas vivimos o ciclismo desde dentro, compartindo rutas, competicións, retos e innumerables experiencias que nos fixeron medrar como deportistas e como persoas.</p>
+      <a href="a-nosa-historia.html" data-i18n="historia3">Ler máis →</a>
+    </div>
+  </section>
+
+  <!-- INDICADOR DE SCROLL (frecha animada) -->
+  <div class="scroll-indicator" aria-hidden="true">
+    <span class="arrow-down"></span>
+  </div>
+
+  <!-- SECCIÓN VÍDEO -->
+  <section class="video-section">
+    <h2 data-i18n="video_titulo">Vídeo de adestramento creativo</h2>
+
+    <div class="video-wrapper">
+      <video controls preload="metadata" poster="videos/portada-video.png">
+        <source src="videos/adestramento-creativo.mp4" type="video/mp4">
+        O teu navegador non soporta a reprodución de vídeo.
+      </video>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p data-i18n="footer_dereitos">&copy; 2026 | Adestramento Creativo | Todos os dereitos reservados.</p>
+    <p data-i18n="footer_contacto">Contacto: adestramentocreativo@outlook.com | Tel: +34 694 303 766</p>
+  </footer>
+
+  <script src="traducions.js?v=9"></script>
+  <script src="script.js?v=5"></script>
 </body>
 </html>
