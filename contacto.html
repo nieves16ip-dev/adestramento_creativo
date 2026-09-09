@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="gl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto - Adestramento Creativo</title>
+  <link rel="stylesheet" href="estilos.css">
+  <style>
+    body {
+      background: linear-gradient(135deg, #6dd5ed, #2193b0);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+    }
+
+    .container h1 {
+      text-align: center;
+      margin-bottom: 15px;
+      color: #fafafa;
+      font-size: 2.5rem;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+      letter-spacing: 1px;
+    }
+
+    .container > p.intro {
+      text-align: center;
+      color: #fafafa;
+      margin-bottom: 40px;
+      font-size: 1.05rem;
+    }
+
+    .contacto-caixa {
+      background-color: #171717;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      padding: 40px;
+    }
+
+    .campo {
+      margin-bottom: 22px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .campo label {
+      color: #0cc0df;
+      font-weight: 600;
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+    }
+
+    .campo input,
+    .campo textarea {
+      background-color: #222;
+      border: 2px solid #333;
+      border-radius: 10px;
+      padding: 12px 14px;
+      color: #fafafa;
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 15px;
+      transition: border-color 0.3s ease;
+    }
+
+    .campo input:focus,
+    .campo textarea:focus {
+      outline: none;
+      border-color: #0cc0df;
+    }
+
+    .campo textarea {
+      resize: vertical;
+      min-height: 140px;
+    }
+
+    /* Campo trampa anti-spam (honeypot), oculto sempre */
+    .campo-honey {
+      position: absolute;
+      left: -9999px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .btn-enviar {
+      background-color: #0cc0df;
+      color: #171717;
+      border: none;
+      border-radius: 30px;
+      padding: 14px 36px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      display: block;
+      margin: 10px auto 0;
+      transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+
+    .btn-enviar:hover {
+      transform: translateY(-2px);
+      background-color: #0aa9c4;
+    }
+
+    .btn-enviar:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    #form-mensaxe {
+      text-align: center;
+      margin-top: 20px;
+      font-weight: 600;
+      font-size: 15px;
+      min-height: 20px;
+    }
+
+    #form-mensaxe span {
+      display: none;
+    }
+
+    #form-mensaxe.exito {
+      color: #2ecc71;
+    }
+
+    #form-mensaxe.erro {
+      color: #e74c3c;
+    }
+
+    @media (max-width: 768px) {
+      .contacto-caixa {
+        padding: 25px;
+      }
+
+      .container h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CABECEIRA -->
+  <header class="header">
+    <div class="logo">
+      <a href="index.html" class="logo">
+        <img src="imaxes/logo.png" alt="Logo da empresa" data-i18n-alt="logo_alt">
+      </a>
+    </div>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="navbar">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="navbar" id="navbar">
+      <ul>
+        <li><a href="index.html" data-i18n="nav_inicio">INICIO</a></li>
+        <li><a href="quen-somos.html" data-i18n="nav_quensomos">QUEN SOMOS</a></li>
+        <li><a href="que-aportamos.html" data-i18n="nav_comotraballamos">QUE APORTAMOS</a></li>
+        <li><a href="a-nosa-historia.html" data-i18n="nav_nosahistoria">A NOSA HISTORIA</a></li>
+        <li><a href="contacto.html" class="active" data-i18n="nav_contacto">CONTACTO</a></li>
+      </ul>
+    </nav>
+
+    <div class="lang-dropdown">
+      <button class="lang-btn" id="langBtn" aria-haspopup="listbox" aria-expanded="false" aria-controls="langMenu">
+        <span id="idioma-actual">🇬🇱 Galego</span>
+        <svg class="arrow" width="12" height="12" viewBox="0 0 24 24" fill="none">
+          <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <ul class="lang-menu" id="langMenu" role="listbox">
+        <li data-lang="gl" data-label="🇬🇱 Galego" role="option">🇬🇱 Galego <span class="default-tag">(por defecto)</span></li>
+        <li data-lang="pt" data-label="🇵🇹 Portugués" role="option">🇵🇹 Portugués</li>
+        <li data-lang="es" data-label="🇪🇸 Español" role="option">🇪🇸 Español</li>
+        <li data-lang="en" data-label="en Inglés" role="option">en Inglés</li>
+        <li data-lang="fr" data-label="🇫🇷 Francés" role="option">🇫🇷 Francés</li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- CONTIDO PRINCIPAL -->
+  <div class="container">
+    <h1 data-i18n="contacto_titulo">Contacto</h1>
+    <p class="intro" data-i18n="contacto_intro">
+      Tes algunha dúbida? Escríbenos e responderémosche o antes posible.
+    </p>
+
+    <div class="contacto-caixa">
+      <form id="formContacto">
+
+        <!-- Campo trampa anti-spam: non tocar, debe quedar baleiro -->
+        <div class="campo campo-honey">
+          <label for="_honey">Non encher este campo</label>
+          <input type="text" id="_honey" name="_honey" tabindex="-1" autocomplete="off">
+        </div>
+
+        <div class="campo">
+          <label for="nome" data-i18n="contacto_nome_label">Nome</label>
+          <input 
+            type="text" 
+            id="nome" 
+            name="nome" 
+            required 
+            data-i18n-placeholder="contacto_nome_placeholder" 
+            placeholder="O teu nome"
+          >
+        </div>
+
+        <div class="campo">
+          <label for="correo" data-i18n="contacto_correo_label">Correo electrónico</label>
+          <input 
+            type="email" 
+            id="correo" 
+            name="correo" 
+            required 
+            data-i18n-placeholder="contacto_correo_placeholder" 
+            placeholder="ocorreo@exemplo.com"
+          >
+        </div>
+
+        <div class="campo">
+          <label for="mensaxe" data-i18n="contacto_mensaxe_label">A túa dúbida</label>
+          <textarea 
+            id="mensaxe" 
+            name="mensaxe" 
+            required 
+            data-i18n-placeholder="contacto_mensaxe_placeholder" 
+            placeholder="Escribe aquí a túa mensaxe..."
+          ></textarea>
+        </div>
+
+        <button type="submit" class="btn-enviar" id="btnEnviar" data-i18n="contacto_boton">Enviar</button>
+
+        <p id="form-mensaxe">
+          <span id="msg-exito" data-i18n="contacto_msg_exito">✅ Mensaxe enviada correctamente. Responderémosche pronto!</span>
+          <span id="msg-erro-campos" data-i18n="contacto_msg_erro_campos">Por favor, completa todos os campos.</span>
+          <span id="msg-erro-envio">
+            <span data-i18n="contacto_msg_erro_envio">❌ Houbo un problema ao enviar a mensaxe. Téntao de novo ou escríbenos directamente a adestramentocreativo@outlook.com</span>
+            <span id="correo-erro"></span>
+          </span>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p data-i18n="footer_dereitos">&copy; 2026 | Adestramento Creativo | Todos os dereitos reservados.</p>
+    <p data-i18n="footer_contacto">Contacto: adestramentocreativo@outlook.com | Tel: +34 694 303 766</p>
+  </footer>
+
+  <script src="traducions.js?v=9"></script>
+  <script src="script.js?v=5"></script>
+
+  <!-- LÓXICA DO FORMULARIO DE CONTACTO -->
+  <script>
+    // ⚠️ IMPORTANTE: substitúe este correo polo correo REAL da empresa
+    const CORREO_EMPRESA = "adestramentocreativo@outlook.com";
+
+    const formContacto = document.getElementById("formContacto");
+    const btnEnviar = document.getElementById("btnEnviar");
+    const mensaxeDiv = document.getElementById("form-mensaxe");
+
+    formContacto.addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      // Anti-spam: se o campo honeypot está cheo, é un bot -> non enviar
+      const honey = document.getElementById("_honey").value;
+      if (honey) {
+        return;
+      }
+
+      const nome = document.getElementById("nome").value.trim();
+      const correo = document.getElementById("correo").value.trim();
+      const mensaxe = document.getElementById("mensaxe").value.trim();
+
+      if (!nome || !correo || !mensaxe) {
+        mostrarMensaxe("msg-erro-campos", "erro");
+        return;
+      }
+
+      btnEnviar.disabled = true;
+      btnEnviar.textContent = "Enviando...";
+      ocultarMensaxes();
+      mensaxeDiv.className = "";
+
+      try {
+        const resposta = await fetch(`https://formsubmit.co/ajax/${CORREO_EMPRESA}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify({
+            nome: nome,
+            correo: correo,
+            mensaxe: mensaxe,
+            _subject: `Nova dúbida de ${nome} - Web Adestramento Creativo`,
+            _template: "table"
+          })
+        });
+
+        const datos = await resposta.json();
+
+        if (resposta.ok) {
+          mostrarMensaxe("msg-exito", "exito");
+          formContacto.reset();
+        } else {
+          throw new Error(datos.message || "Erro descoñecido");
+        }
+
+      } catch (error) {
+        console.error(error);
+        document.getElementById("correo-erro").textContent = CORREO_EMPRESA;
+        mostrarMensaxe("msg-erro-envio", "erro");
+      } finally {
+        btnEnviar.disabled = false;
+        btnEnviar.textContent = "Enviar";
+      }
+    });
+
+    function ocultarMensaxes() {
+      document.querySelectorAll("#form-mensaxe > span").forEach(s => s.style.display = "none");
+    }
+
+    function mostrarMensaxe(idSpan, tipo) {
+      ocultarMensaxes();
+      document.getElementById(idSpan).style.display = "inline";
+      mensaxeDiv.className = tipo;
+    }
+  </script>
+
+</body>
+</html>
